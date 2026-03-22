@@ -21,13 +21,13 @@ Axios: Consumo da API REST.
 Vite: Ferramenta de build ultra-rápida.
 
 CSS3: Estilização customizada (Tema Dark/Obsidian).
-# 💰 Obsidian | Sistema de Controle de Gastos Residenciais
+# | Sistema de Controle de Gastos Residenciais
 
 Aplicação Full-stack moderna para gerenciamento de finanças domésticas. O sistema permite o controle rigoroso de transações, vinculando moradores às suas respectivas receitas e despesas com cálculos automáticos de saldo em tempo real.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### **Backend**
 - **C# / .NET 8**: Framework principal.
@@ -44,7 +44,7 @@ Aplicação Full-stack moderna para gerenciamento de finanças domésticas. O si
 
 ---
 
-## 📂 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```bash
 ├── /FinancasApi             # Backend 
@@ -63,29 +63,29 @@ Aplicação Full-stack moderna para gerenciamento de finanças domésticas. O si
 
 
 
-⚙️ Funcionalidades & Regras de Negócio
-👤 Gestão de Pessoas
+Funcionalidades & Regras de Negócio
+ Gestão de Pessoas
 CRUD Completo: Criar, listar, editar (PUT) e deletar.
 
 Cascata: Ao deletar uma pessoa, todas as suas transações são removidas automaticamente.
 
 Validação: Nome obrigatório com limite de 200 caracteres.
 
-📊 Dashboard Inteligente
+ Dashboard Inteligente
 Totais por Pessoa: Listagem detalhada de Receitas, Despesas e Saldo individual.
 
 Consolidado Geral: Cálculo automático de Receita Total, Despesa Total e Saldo Líquido da residência.
 
 Feedback Visual: Cores dinâmicas para saldos positivos (receita) e negativos (despesa).
 
-🧠 Regras de Validação
-🔞 Menores de idade: Usuários com idade < 18 anos são restritos apenas a lançamentos de Despesas.
+ Regras de Validação
+ Menores de idade: Usuários com idade < 18 anos são restritos apenas a lançamentos de Despesas.
 
-💰 Valores: Transações permitem apenas valores positivos.
+ Valores: Transações permitem apenas valores positivos.
 
-🏷️ Compatibilidade: A categoria escolhida deve ser compatível com o tipo da transação (Receita/Despesa).
+ Compatibilidade: A categoria escolhida deve ser compatível com o tipo da transação (Receita/Despesa).
 
-▶️ Como rodar o projeto
+ Como rodar o projeto
 1. Backend (API)
 Bash
 cd FinancasApi
@@ -100,7 +100,7 @@ npm install
 npm run dev
 Acesse a aplicação: http://localhost:5173
 
-🔗 Integração
+ Integração
 O frontend está configurado para consumir a API via Axios na porta 5035. Caso precise alterar o endereço da API, verifique o arquivo src/api/axios.ts.
 
 Desenvolvido por Lucas Honorio 
