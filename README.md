@@ -87,9 +87,9 @@ O frontend utiliza Axios para comunicação assíncrona com a API na porta 5035.
 
 Para ajustes de ambiente, verifique o arquivo: src/api/axios.ts
 
-<h6 align="center">
+<h1 align="center">
 <b>Desenvolvido com dedicação por Lucas Honorio</b> 
-</h6>
+</h1>
 
 
 ## 📂 Estrutura de Pastas
