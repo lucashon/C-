@@ -11,8 +11,12 @@ public class ReportsController : ControllerBase
     public IActionResult GetReportByPerson()
     {
         var db = JsonDb.Load();
+
+        // Lógica principal: Mapeia cada pessoa e calcula o somatório de suas transações: 
         var report = db.Persons.Select(p => {
             var trans = db.Transactions.Where(t => t.PersonId == p.Id).ToList();
+
+            // Filtra e soma por tipo (case-insensitive)
             var rec = trans.Where(t => t.Type.ToLower() == "receita").Sum(t => t.Value);
             var des = trans.Where(t => t.Type.ToLower() == "despesa").Sum(t => t.Value);
             
@@ -21,10 +25,11 @@ public class ReportsController : ControllerBase
                 name = p.Name, 
                 totalReceita = rec, 
                 totalDespesa = des, 
-                saldo = rec - des 
+                saldo = rec - des // Cálculo automático do saldo individual
             };
         }).ToList();
-
+        
+        // Retorna o relatório individual e o consolidado geral da residência
         return Ok(new {
             pessoas = report,
             totalGeral = new {
