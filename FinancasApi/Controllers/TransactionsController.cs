@@ -11,7 +11,7 @@ public class TransactionsController : ControllerBase
     [HttpGet]
     public IActionResult Get() 
     {
-        // Carrega a base de dados em memória para listar as transações cadastradas
+        // Aqui eu carrego a minha base de dados JSON para listar todas as transações feitas.
         var db = JsonDb.Load();
         return Ok(db.Transactions);
     }
@@ -21,39 +21,41 @@ public class TransactionsController : ControllerBase
     {
         var db = JsonDb.Load();
         
-        // Verificação de Integridade: Buscamos as referências para garantir que o lançamento 
-        // está sendo vinculado a uma pessoa e categoria que realmente existam no sistema.
+        // Aqui eu faço uma verificação de integridade: eu busco a pessoa e a categoria no banco.
+        // Se o usuário tentar lançar algo para um ID que não existe, eu travo na hora.
         var person = db.Persons.FirstOrDefault(p => p.Id == transaction.PersonId);
         var category = db.Categories.FirstOrDefault(c => c.Id == transaction.CategoryId);
 
         if (person == null || category == null)
             return BadRequest("Pessoa ou Categoria inválida. Verifique os dados e tente novamente.");
 
-        // Regra de Negócio (Valores): Como estamos tratando de finanças, 
-        // não permitimos valores nulos ou negativos para manter a consistência dos cálculos.
+        // Aqui eu aplico uma regra de valores: como é um sistema financeiro, 
+        // eu não deixo passar valores zerados ou negativos para não quebrar meus cálculos de saldo.
         if (transaction.Value <= 0)
             return BadRequest("O valor da transação deve ser positivo para manter a consistência dos cálculos.");
     
-        // Regra de Negócio (Social): Menores de 18 anos são restritos apenas a lançamentos de despesas.
-        // Isso evita que dependentes registrem receitas sem supervisão no sistema residencial.
+        // Aqui eu criei uma regra social: menores de 18 anos só podem registrar despesas.
+        // Isso garante que os dependentes da casa não registrem receitas por conta própria.
         if (person.Age < 18 && transaction.Type.ToLower() == "receita")
             return BadRequest("Atenção: Menores de 18 anos só podem registrar despesas.");
 
-        // Validação de Compatibilidade:
-        // Aqui garantimos que uma categoria configurada apenas para "Receita" 
-        // não seja usada em uma "Despesa" acidentalmente (ou vice-versa).
+        // Aqui eu faço a validação de compatibilidade: eu verifico se o tipo da transação (Receita/Despesa)
+        // combina com o que foi configurado na categoria. Se a categoria for só de 'Despesa', 
+        // eu não deixo o usuário lançar uma 'Receita' nela por engano.
         string tipo = transaction.Type.ToLower();
         string finalidade = category.Purpose.ToLower();
 
         if (finalidade != "ambas" && finalidade != tipo)
             return BadRequest($"Conflito de categoria: A categoria '{category.Description}' é exclusiva para {category.Purpose}.");
 
-        // Lógica de Identificação (ID Incremental): 
-        // Simulamos o comportamento 'Auto-Increment' de bancos relacionais pegando o maior ID atual + 1.
+        // Aqui eu uso a lógica de ID Incremental: pego o maior ID que já existe e somo 1.
+        // Isso simula o comportamento de um banco de dados profissional dentro do meu arquivo JSON.
         transaction.Id = db.Transactions.Any() ? db.Transactions.Max(t => t.Id) + 1 : 1;
         
         db.Transactions.Add(transaction);
-        db.Save(); // Persiste a nova transação no arquivo físico JSON
+        
+        // Depois de passar por todas essas validações, eu salvo a transação no arquivo físico.
+        db.Save(); 
         return Ok(transaction);
     }
 }

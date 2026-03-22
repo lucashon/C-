@@ -11,7 +11,7 @@ public class PersonsController : ControllerBase
     [HttpGet]
     public IActionResult Get() 
     {
-        // Recupera a lista completa de pessoas armazenadas no arquivo JSON
+        // Aqui eu recupero a lista de todo mundo que está salvo no meu arquivo JSON para exibir no Front.
         var db = JsonDb.Load();
         return Ok(db.Persons);
     }
@@ -21,17 +21,18 @@ public class PersonsController : ControllerBase
     {
         var db = JsonDb.Load();
         
-        // Validação de entrada: Garante que o nome não esteja vazio e respeite o limite de caracteres.
-        // Isso previne erros de preenchimento e mantém a integridade visual da interface.
+        // Aqui eu valido o nome: se estiver vazio ou for longo demais (mais de 200 letras), eu travo o cadastro.
+        // Isso evita que o layout do meu React quebre com nomes gigantes.
         if (string.IsNullOrWhiteSpace(person.Name) || person.Name.Length > 200)
             return BadRequest("O nome é obrigatório e deve ter no máximo 200 caracteres.");
 
-        // Lógica de Identificação: Gera um novo ID baseado no maior valor já existente + 1.
-        // Garante a unicidade de cada registro dentro do sistema.
+        // Aqui eu gero o ID único: pego o maior número que já existe na lista e somo 1.
         person.Id = db.Persons.Any() ? db.Persons.Max(p => p.Id) + 1 : 1;
         
         db.Persons.Add(person);
-        db.Save(); // Persiste a nova pessoa no arquivo de dados
+        
+        // Aqui eu gravo a nova pessoa fisicamente no arquivo de dados.
+        db.Save(); 
         return Ok(person);
     }
 
@@ -39,16 +40,16 @@ public class PersonsController : ControllerBase
     public IActionResult Update(int id, Person personUpdate)
     {
         var db = JsonDb.Load();
+        // Aqui eu procuro a pessoa pelo ID que veio na URL para ver se ela realmente existe no banco.
         var person = db.Persons.FirstOrDefault(p => p.Id == id);
         
-        // Verifica se o registro solicitado existe antes de tentar a atualização
         if (person == null) return NotFound("Pessoa não encontrada.");
 
-        // Validação de segurança para garantir que o novo nome fornecido é válido.
+        // Aqui eu faço a mesma validação de segurança do nome antes de autorizar a mudança.
         if (string.IsNullOrWhiteSpace(personUpdate.Name) || personUpdate.Name.Length > 200)
             return BadRequest("Nome inválido.");
 
-        // Atualização de campos específicos: Mantemos o ID original e atualizamos apenas Nome e Idade.
+        // Aqui eu atualizo apenas os campos permitidos, mantendo o ID original da pessoa intacto.
         person.Name = personUpdate.Name;
         person.Age = personUpdate.Age;
 
@@ -62,11 +63,11 @@ public class PersonsController : ControllerBase
         var db = JsonDb.Load();
         var person = db.Persons.FirstOrDefault(p => p.Id == id);
         
-        // Retorno padrão caso o ID informado não corresponda a nenhum usuário.
         if (person == null) return NotFound();
 
-        // Lógica de Integridade Referencial: Remove em cascata todas as transações ligadas a este ID.
-        // Como o banco é um arquivo JSON, essa limpeza manual evita o acúmulo de dados órfãos.
+        // Aqui está uma parte vital: a lógica de integridade. 
+        // Como estou deletando uma pessoa, eu também retiro todas as transações dela do sistema.
+        // Isso evita que fiquem "dados órfãos" perdidos no meu arquivo JSON.
         db.Transactions.RemoveAll(t => t.PersonId == id);
         db.Persons.Remove(person);
         

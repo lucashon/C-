@@ -4,6 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import "./layout.css";
 
 export function Layout({ children }: { children: ReactNode }) {
+  // Aqui eu uso o useLocation para saber exatamente em qual página o usuário está.
+  // Isso serve para eu "acender" o botão azul no menu lateral e dar um feedback visual.
   const location = useLocation();
 
   return (
@@ -18,6 +20,7 @@ export function Layout({ children }: { children: ReactNode }) {
         </div>
 
         <nav className="menu">
+          {/* Aqui eu verifico a rota atual: se for a mesma do link, eu aplico a classe "active" */}
           <Link to="/" className={location.pathname === "/" ? "active" : ""}>
             <LayoutDashboard size={20} /> Dashboard
           </Link>
@@ -33,6 +36,7 @@ export function Layout({ children }: { children: ReactNode }) {
         </nav>
 
         <div className="sidebar-footer">
+          {/* Aqui eu criei um atalho rápido para o usuário adicionar uma transação de qualquer tela */}
           <Link to="/transactions">
             <button className="add-btn">+ Add Transaction</button>
           </Link>
@@ -46,6 +50,8 @@ export function Layout({ children }: { children: ReactNode }) {
 
       <main className="content">
         <div className="content-container">
+          {/* Aqui é onde a "mágica" acontece: o conteúdo de cada página (Dashboard, People, etc.) 
+              é renderizado dentro deste espaço branco através do 'children' */}
           {children}
         </div>
       </main>
