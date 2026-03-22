@@ -9,6 +9,10 @@
 
 ---
 
+<p align="center">
+  <img src="./front-financas/public/prototipo.png" alt="Dashboard Financeiro" width="800">
+</p>
+
 ## Sobre o Projeto:
 Aplicação **Full-stack** moderna para gerenciamento de finanças domésticas. O sistema permite o controle rigoroso de transações, vinculando moradores às suas respectivas receitas e despesas com cálculos automáticos de saldo em tempo real.
 

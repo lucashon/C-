@@ -1,5 +1,11 @@
 {
-  "Persons": [],
+  "Persons": [
+    {
+      "Id": 1,
+      "Name": "Lucas",
+      "Age": 20
+    }
+  ],
   "Categories": [
     {
       "Id": 1,
@@ -20,7 +26,74 @@
       "Id": 4,
       "Description": "Freelancer",
       "Purpose": "Receita"
+    },
+    {
+      "Id": 5,
+      "Description": "acedemia",
+      "Purpose": "Despesa"
+    },
+    {
+      "Id": 6,
+      "Description": "Gastos fixos",
+      "Purpose": "Despesa"
     }
   ],
-  "Transactions": []
+  "Transactions": [
+    {
+      "Id": 1,
+      "Description": "PAGUEI",
+      "Value": 200,
+      "Type": "Despesa",
+      "PersonId": 1,
+      "CategoryId": 6
+    },
+    {
+      "Id": 2,
+      "Description": "RECEBI",
+      "Value": 1004,
+      "Type": "Receita",
+      "PersonId": 1,
+      "CategoryId": 2
+    },
+    {
+      "Id": 3,
+      "Description": "casa",
+      "Value": 200,
+      "Type": "Despesa",
+      "PersonId": 1,
+      "CategoryId": 6
+    },
+    {
+      "Id": 4,
+      "Description": "cart\u00E3o",
+      "Value": 240,
+      "Type": "Despesa",
+      "PersonId": 1,
+      "CategoryId": 3
+    },
+    {
+      "Id": 5,
+      "Description": "fixo investimento",
+      "Value": 200,
+      "Type": "Despesa",
+      "PersonId": 1,
+      "CategoryId": 6
+    },
+    {
+      "Id": 6,
+      "Description": "MEU CART\u00C3O",
+      "Value": 78,
+      "Type": "Despesa",
+      "PersonId": 1,
+      "CategoryId": 3
+    },
+    {
+      "Id": 7,
+      "Description": "freelander ",
+      "Value": 2653,
+      "Type": "Receita",
+      "PersonId": 1,
+      "CategoryId": 2
+    }
+  ]
 }
