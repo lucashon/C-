@@ -1,0 +1,26 @@
+{
+  "Persons": [],
+  "Categories": [
+    {
+      "Id": 1,
+      "Description": "Aluguel",
+      "Purpose": "Despesa"
+    },
+    {
+      "Id": 2,
+      "Description": "Sal\u00E1rio",
+      "Purpose": "Receita"
+    },
+    {
+      "Id": 3,
+      "Description": "Cart\u00E3o de Cr\u00E9dito",
+      "Purpose": "Despesa"
+    },
+    {
+      "Id": 4,
+      "Description": "Freelancer",
+      "Purpose": "Receita"
+    }
+  ],
+  "Transactions": []
+}
