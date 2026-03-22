@@ -9,7 +9,7 @@
 
 ---
 
-## 📝 Sobre o Projeto
+## Sobre o Projeto:
 Aplicação **Full-stack** moderna para gerenciamento de finanças domésticas. O sistema permite o controle rigoroso de transações, vinculando moradores às suas respectivas receitas e despesas com cálculos automáticos de saldo em tempo real.
 
 ### Diferenciais
@@ -41,12 +41,12 @@ Aplicação **Full-stack** moderna para gerenciamento de finanças domésticas. 
 - ** Dashboard**: Consolidação automática de dados (Total Receita, Total Despesa e Saldo Líquido).
 - ** Compatibilidade**: Validação de categorias para garantir que tipos de transação coincidam.
 
-## ⚙️ Funcionalidades & Regras de Negócio: 
+## Funcionalidades & Regras de Negócio: 
 
-### 👤 Gestão de Pessoas
+### Gestão de Pessoas
 - **CRUD Completo**: Interface intuitiva para criar, listar, **editar (PUT)** e deletar registros.
-- **🛡️ Exclusão em Cascata**: Sistema de segurança que remove automaticamente todas as transações vinculadas ao excluir uma pessoa.
-- **📏 Validação de Entrada**: Nome obrigatório com limitação técnica de 200 caracteres para integridade do banco.
+- ** Exclusão em Cascata**: Sistema de segurança que remove automaticamente todas as transações vinculadas ao excluir uma pessoa.
+- ** Validação de Entrada**: Nome obrigatório com limitação técnica de 200 caracteres para integridade do banco.
 
 ### Dashboard Inteligente
 - ** Visão Individual**: Listagem detalhada com cálculos automáticos de Receitas, Despesas e Saldo por morador.
@@ -63,20 +63,37 @@ Aplicação **Full-stack** moderna para gerenciamento de finanças domésticas. 
 
 ---
 
-## Como Rodar o Projeto
 
-### 1. Backend (API)
+🔧 1. Backend (API)
 Abra o terminal na pasta raiz e execute:
-```bash
--- cd FinancasApi
--- dotnet restore
--- dotnet run
 
+Bash
+cd FinancasApi
+dotnet restore
+dotnet run
+Documentação Swagger: http://localhost:5035/swagger
 
-```bash
+2. Frontend (Web)
+Em um novo terminal, execute:
+
+Bash
+cd front-financas
+npm install
+npm run dev
+Aplicação Web: http://localhost:5173
+
+Integração & API :
+O frontend utiliza Axios para comunicação assíncrona com a API na porta 5035.
+
+Para ajustes de ambiente, verifique o arquivo: src/api/axios.ts
+
+<p align="center">
+<b>Desenvolvido com dedicação por Lucas Honorio</b> 
+</p>
+
 
 ## 📂 Estrutura de Pastas
-
+```bash
 ├── 📁 FinancasApi             # Servidor C# .NET
 │   ├── 📁 Controllers         # Rotas da API
 │   ├── 📁 Models              # Modelagem de dados
